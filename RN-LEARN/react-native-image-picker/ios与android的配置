@@ -1,0 +1,28 @@
+最新的版本安装：npm install react-native-image-picker@latest --save
+在手动配置前：尝试自动配置（虽然很多时候都是失败的）react-native link
+配置的主要捷径还是看官方的文档
+IOS配置：
+	1.直接切入到react-native-image-picker/ios/中选中RNImagePicker.xcodeproj拉进Libraries中；
+	2.点击“项目名”，在TARGETS下选中“项目名”；
+	3.选择Build Phases,将libRNImagePicker.a加入Link Binary With Libraries中。
+	4.将NSPhotoLibraryUsageDescription, NSCameraUsageDescription, NSPhotoLibraryAddUsageDescription and NSMicrophoneUsageDescription四个添加到info.plist中的key中。配置完成。
+ABDROID配置：
+	1.在android/settings.gradle中添加：
+include ':react-native-image-picker'
+project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
+	2.更新android/build.gradle中的：（落后的版本更新到这就行）
+		dependencies {
+        		classpath 'com.android.tools.build:gradle:2.2.+' // <- USE 2.2.+ version
+    		}
+	3.更新android/gradle/wrapper/gradle-wrapper.properties中的：（落后的版本更新到这就行）
+		distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip
+	4.在android/app/build.gradle中的dependencies里添加一行：
+    		compile project(':react-native-image-picker')
+	5.AndroidManifest.xml中添加相机权限
+		<uses-permission android:name="android.permission.CAMERA" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	6.android/app/src/main/java/../MainApplication.java中导入一个包import com.imagepicker.ImagePickerPackage;并且在
+		protected List<ReactPackage> getPackages()函数的返回new MainReactPackage()后面加一个new ImagePickerPackage()，如果有其他的需求，
+		将添加的替换成new ImagePickerPackage(R.style.my_dialog_style)；
+就此配置完成，其他的可选配置暂不进行研究。
+	
