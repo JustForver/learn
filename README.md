@@ -1,2 +1,1 @@
-# react-native-appDemo
-a app just for practice！
+经过已经使用过的组件，单独拎出来回顾学习，增强记忆
