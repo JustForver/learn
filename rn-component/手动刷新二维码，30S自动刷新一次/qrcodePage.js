@@ -153,8 +153,7 @@ const styles = StyleSheet.create({
 });
 export default connect(
     (state)=>({
-        TicketReducer:state.TicketReducer,
-        UserReducer:state.UserReducer
+        qrcodeReducer:state.qrcodeReducer
     })
 )(QRCodePage)
 
